@@ -20,6 +20,9 @@ node {
             rtGradle.usesPlugin = true // Artifactory plugin already defined in build script
         }
         stage('Exec Gradle') {
+            sh 'echo $GRADLE_USER_HOME'
+            //sh 'sudo -u www-data "gradle --version"'
+            
             rtGradle.run rootDir: "artifactory/", buildFile: 'build.gradle', tasks: 'clean artifactoryPublish', buildInfo: buildInfo
         }
         stage('Publish build info') {
